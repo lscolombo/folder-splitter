@@ -1,7 +1,7 @@
 import os, os.path, shutil
 import shutil
 
-def split_folder_content_in_subfolders(path,max_files_per_folder):
+def split_folder_content_in_subfolders(path,max_files_per_folder,op):
     files=[]
     try:
         #list of filenames in directory
@@ -25,28 +25,36 @@ def split_folder_content_in_subfolders(path,max_files_per_folder):
     current = 0
     suffix = 1
 
-    while current <= file_count:
+    while current <= file_count and len(files) > 0:
         new_folder = str(folder_name + '_' + str(suffix))
         os.mkdir(str(path)+'\\'+new_folder)
         new_folder_size = len(os.listdir(path+'\\'+new_folder))
 
-        while new_folder_size <= int(max_files_per_folder):
-            f = files[current]
+        while new_folder_size <= int(max_files_per_folder) and len(files) > 0:
+            f = files[0]
             #os.rename(path+'\\'+f, new_folder+'\\'+f)
             shutil.move(path+'\\'+f, path+'\\'+new_folder+'\\'+f)
             files.remove(f)
 
             new_folder_size = len(os.listdir(path+'\\'+new_folder))
-            current = current + 1
 
-            print(str(current + 1) + " from %s files have been moved" % int(file_count))
+            print(str(file_count - len(files)) + " from %s files have been " % int(file_count) + str(op))
 
         suffix = suffix + 1
 
 def main():
     path = input("Give a path: ")
     max_files_per_folder = input("How many files per folder?: ")
-    split_folder_content_in_subfolders(path,max_files_per_folder)
+    operacion = input("Do you want to Move or Copy the files to the new subfolders? [M/C]: ")
+    if operacion == 'M':
+        op = 'moved'
+    elif operacion == 'C':
+        op = 'copied'
+    else:
+        print('Option is not valid.')
+        operacion = input("Do you want to Move or Copy the files to the new subfolders? [M/C]: ")
+    split_folder_content_in_subfolders(path,max_files_per_folder,op)
+    print('Completed.')
 
 if __name__ == "__main__":
     main()
