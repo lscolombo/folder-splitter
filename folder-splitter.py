@@ -32,8 +32,11 @@ def split_folder_content_in_subfolders(path,max_files_per_folder,op):
 
         while new_folder_size <= int(max_files_per_folder) and len(files) > 0:
             f = files[0]
-            #os.rename(path+'\\'+f, new_folder+'\\'+f)
-            shutil.move(path+'\\'+f, path+'\\'+new_folder+'\\'+f)
+            
+            if op == 'moved':
+                shutil.move(path+'\\'+f, path+'\\'+new_folder+'\\'+f)
+            if op == 'copied':
+                shutil.copy2(path+'\\'+f, path+'\\'+new_folder+'\\'+f)
             files.remove(f)
 
             new_folder_size = len(os.listdir(path+'\\'+new_folder))
