@@ -1,11 +1,25 @@
 import os, os.path, shutil
-import shutil
+
+def create_subfolder(folder_name,suffix,path):
+    new_folder = ''
+    try:
+        new_folder = str(folder_name + '_' + str(suffix))
+        os.mkdir(str(path)+'\\'+new_folder)
+        print(new_folder)
+    except FileExistsError:
+        suffix = suffix + 1
+        create_subfolder(folder_name,suffix,path)
+    return(new_folder)
 
 def split_folder_content_in_subfolders(path,max_files_per_folder,op):
     files=[]
     try:
         #list of filenames in directory
-        files = os.listdir(path)
+        fil = os.listdir(path)
+        for f in fil:
+            if os.path.isfile(path+'\\'+f):
+                files.append(f)
+        files.sort(key=lambda s: os.path.getmtime(os.path.join(path, s)))
     except FileNotFoundError:
         print('The specified folder does not exist')
         main()
@@ -26,8 +40,8 @@ def split_folder_content_in_subfolders(path,max_files_per_folder,op):
     suffix = 1
 
     while current <= file_count and len(files) > 0:
-        new_folder = str(folder_name + '_' + str(suffix))
-        os.mkdir(str(path)+'\\'+new_folder)
+        new_folder = create_subfolder(folder_name,suffix,path)
+        print(new_folder)
         new_folder_size = len(os.listdir(path+'\\'+new_folder))
 
         while new_folder_size <= int(max_files_per_folder) and len(files) > 0:
