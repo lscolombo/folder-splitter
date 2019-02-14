@@ -3,40 +3,34 @@ import os
 import pytest
 import shutil
 import time
+import pyfakefs as fs
 
-path = os.getcwd()
+import unittest
+from unittest.mock import patch
+
+class FolderSplitterMethods(unittest.TestCase):
+
+    # @mock.patch('folder_splitter.os.mkdir')
+    def test_new_subfolder_has_been_created(self):
+        with patch('folder_splitter.create_subfolder') as mocked_create_subfolder:
+            mocked_create_subfolder.return_value = 'folder_1'        
+            result=mocked_create_subfolder('folder',1,'\\path\\folder')
+            self.assertEqual(result,'folder_1')
+
+    def test_file_no_longer_exists_in_original_dir(self):
+        with patch('folder_splitter.move') as mocked_move:
+            with patch('folder_splitter.os.listdir') as mocked_listdir:
+                mocked_move('\\path\\folder','file','folder_1')
+                file_list = mocked_listdir('\\path\\folder\\folder_1')
+                self.assertEqual(len(file_list),0)
+            
+if __name__ == '__main__':
+    unittest.main()
 
 
-def test_move_2_files_to_new_folder():               
-    folder_splitter.split_folder_content_in_subfolders(path+'\\test_files','2','M')
-    sum = 1+1
-    assert sum == 2
-
-def test_new_subfolder_has_been_created():
-    print(path)
-    subfolder = path+'\\test_files\\test_files_1'
-    assert os.path.isdir(subfolder) == True
-
-
-def test_files_no_longer_exist_in_original_dir():
-    path_files = os.listdir(path+'\\test_files')
-    assert len(path_files) == 1
-
-
-def test_files_have_been_moved_to_new_subfolder():
-    subfolder_files = os.listdir(path+'\\test_files\\test_files_1')
-    assert len(subfolder_files) == 2
-
-
-def test_undo():
-    fil = os.listdir(path+'\\test_files\\test_files_1')
-    for f in fil:
-        if os.path.isfile(path+'\\test_files\\test_files_1'+f):
-            shutil.move(path+'\\test_files\\test_files_1'+f, path+'\\test_files'+f)
-            time.sleep(5)
-    shutil.rmtree(path+'\\test_files\\test_files_1')
-    sum = 1+1
-    assert sum == 2
-
+# path = os.getcwd()
+# def test_move_2_files_to_new_folder(fs):               
+# def test_new_subfolder_has_been_created(fs):
+# def test_files_have_been_moved_to_new_subfolder():
 
     
