@@ -1,4 +1,4 @@
-import os, os.path, shutil
+import os, os.path, shutil, re
 
 def list_dir(path):
     files=[]
@@ -8,11 +8,22 @@ def list_dir(path):
         for f in fil:
             if os.path.isfile(path+'\\'+f):
                 files.append(f)
+        sort_method = input("Do you want to sort the files by creation date or name? (Press enter for default sorting) [D/N]: ")
+        files = sort(files,sort_method)
         return(files)
-        files.sort(key=lambda s: os.path.getmtime(os.path.join(path, s)))
     except FileNotFoundError:
         print('The specified folder does not exist')
         main()
+
+def sort(files,option):
+    if option.upper() == 'D':
+        files.sort(key=lambda s: os.path.getmtime(os.path.join(path, s)))
+        return(files)
+    elif option.upper() == 'N':
+        files = sort_list_of_file_names_by_number_in_name(files)
+        return(files)
+    else:
+        return(files)
 
 def calculate_files_per_folder(file_count,max_files_per_folder):
     try:
@@ -45,6 +56,20 @@ def move(path,f,new_folder):
 
 def copy(path,f,new_folder):
     shutil.copy2(path+'\\'+f, path+'\\'+new_folder+'\\'+f)
+
+#used in sorting method
+def natural_key(string_):
+    return [int(s) if s.isdigit() else s for s in re.split(r'(\d+)', string_)]
+
+#example input ['file1','file10','file100','file11','file12','file2']
+#example output ['file1','file2','file10','file11','file12','file100']
+def sort_list_of_file_names_by_number_in_name(list):
+    try:
+        list = sorted(list, key=natural_key)
+        return(list)
+    except:
+        print('Unable to sort list by number. Returned original list')
+        return(list)
 
 
 def split_folder_content_in_subfolders(path,max_files_per_folder,op):
