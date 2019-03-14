@@ -39,8 +39,12 @@ Este proyecto es útil para organizar, en subcarpetas, archivos que se encuentra
 
 **Antes:**
 
-![ScreenShot] (https://i.imgur.com/CHqq8uf.png)
+![before](https://user-images.githubusercontent.com/11711053/54398750-21f31f00-469a-11e9-8c20-85768892bee1.png)
+
 
 **Después:**
 
 ![ScreenShot] (https://i.imgur.com/6mraDLk.png)
+
+![after](https://user-images.githubusercontent.com/11711053/54398809-67afe780-469a-11e9-8c33-350daf746925.png)
+
