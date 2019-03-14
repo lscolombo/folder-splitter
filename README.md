@@ -39,10 +39,8 @@ Este proyecto es útil para organizar, en subcarpetas, archivos que se encuentra
 
 **Antes:**
 
-![alt text]
-
+![Alt text] (https://imgur.com/CHqq8uf)
 
 **Después:**
 
-![alt text] 
-
+![Alt text] (https://imgur.com/6mraDLk)
