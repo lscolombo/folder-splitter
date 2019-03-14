@@ -27,3 +27,22 @@ Este proyecto es útil para organizar, en subcarpetas, archivos que se encuentra
 `python folder_splitter.py`
 
 
+## Ejemplo: Árbol de una carpeta antes y después del proceso
+
+**Condiciones aplicadas:**
+- 3 archivos por subcarpeta
+
+- Copiar
+
+- Ordenar por nombre de archivo
+
+
+**Antes:**
+
+![alt text]
+
+
+**Después:**
+
+![alt text] 
+
