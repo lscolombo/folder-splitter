@@ -6,7 +6,7 @@ Este proyecto es útil para organizar, en subcarpetas, archivos que se encuentra
 
 ### Características
 
-- Se deberà indicar el *nùmero de archivos* que conformará un subgrupo. La cantidad de subcarpetas creadas dependerá de este nùmero. 
+- Se deberá indicar el *número de archivos* que conformará un subgrupo. La cantidad de subcarpetas creadas dependerá de este número. 
 
 - Se deberá elegir entre *copiar (C)* o *mover (M)* los archivos de la carpeta hacia las nuevas subcarpetas.
 
@@ -43,8 +43,6 @@ Este proyecto es útil para organizar, en subcarpetas, archivos que se encuentra
 
 
 **Después:**
-
-![ScreenShot] (https://i.imgur.com/6mraDLk.png)
 
 ![after](https://user-images.githubusercontent.com/11711053/54398809-67afe780-469a-11e9-8c33-350daf746925.png)
 
